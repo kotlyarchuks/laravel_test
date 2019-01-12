@@ -14,22 +14,18 @@ class ProjectsController extends Controller
         return view('projects/index', compact('projects'));
     }
 
-    public function show($id)
+    public function show(Project $project)
     {
-        return Project::findOrFail($id);
+        return view('projects/show', compact('project'));
     }
 
-    public function edit($id)
+    public function edit(Project $project)
     {
-        $project = Project::findOrFail($id);
-
         return view('projects/edit', compact('project'));
     }
 
-    public function update($id)
+    public function update(Project $project)
     {
-        $project = Project::findOrFail($id);
-
         $project->title = request('title');
         $project->description = request('description');
         $project->save();
@@ -54,10 +50,8 @@ class ProjectsController extends Controller
 
     public function destroy($id)
     {
-        $project = Project::findOrFail($id);
         $project->delete();
 
         return redirect('/projects');
-
     }
 }
