@@ -31,8 +31,8 @@
 </head>
 
 <body>
-  <div class="container">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+  <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+    <div class="container">
       <div class="navbar-menu">
         <div class="navbar-start">
           <a href="/projects" class="navbar-item">
@@ -55,7 +55,7 @@
           </div>
         </div>
       </div>
-    </nav>
+  </nav>
   </div>
   <section class="section">
     <div class="container">
