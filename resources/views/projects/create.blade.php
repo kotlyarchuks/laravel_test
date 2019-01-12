@@ -3,16 +3,7 @@
 <div class="columns is-centered">
   <div class="column is-half">
     <h2 class="title">Create new project</h2>
-
-    @if($errors->any())
-    <div class="notification is-danger">
-      <ul>
-        @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-        @endforeach
-      </ul>
-    </div>
-    @endif
+  @include('errors')
 
     <form action="/projects" method="POST">
       @csrf
