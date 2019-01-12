@@ -5,10 +5,27 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>My project</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css">
   <style>
     .is-completed {
       text-decoration: line-through;
+    }
+
+    .card__header__link {
+      text-decoration: none !important;
+    }
+
+    .new-article .message-header {
+      background: #AAA;
+    }
+
+    .new-article .message-body {
+      background: rgb(243, 243, 243);
+    }
+
+    .big-plus {
+      font-size: 48px;
+      color: #AAA;
     }
   </style>
 </head>

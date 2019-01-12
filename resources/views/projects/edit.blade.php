@@ -27,13 +27,6 @@
       </div>
     </form>
 
-    <form action="/projects/{{$project->id}}" method="POST" style='margin-top: 1rem;'>
-      @method('delete') @csrf
-      <div class="control">
-        <button class="button is-danger" type="submit">Delete</button>
-      </div>
-    </form>
-
   </div>
 </div>
 @endsection
