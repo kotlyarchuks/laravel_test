@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\Project;
-use \App\Task;
 
 class ProjectTasksController extends Controller
 {
@@ -14,13 +13,6 @@ class ProjectTasksController extends Controller
             'description' => 'required|min:3|max:100',
         ]);
         $project->addTask($validated);
-
-        return back();
-    }
-
-    public function update(Task $task)
-    {
-        request()->has('completed') ? $task->complete() : $task->incomplete();
 
         return back();
     }
