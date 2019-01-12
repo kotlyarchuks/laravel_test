@@ -3,20 +3,31 @@
 <div class="columns is-centered">
   <div class="column is-half">
     <h2 class="title">Create new project</h2>
+
+    @if($errors->any())
+    <div class="notification is-danger">
+      <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+      </ul>
+    </div>
+    @endif
+
     <form action="/projects" method="POST">
       @csrf
 
       <div class="field">
         <label class="label">Title</label>
         <div class="control">
-          <input class="input" name="title" type="text" placeholder="Project title">
+          <input class="input" name="title" type="text" placeholder="Project title" required value="{{ old('title') }}">
         </div>
       </div>
 
       <div class="field">
         <label class="label">Description:</label>
         <div class="control">
-          <textarea class="textarea" name="description" placeholder="Project description"></textarea>
+          <textarea class="textarea" name="description" placeholder="Project description" required>{{ old('description') }}</textarea>
         </div>
       </div>
 
