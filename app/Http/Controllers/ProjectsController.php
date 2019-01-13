@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ProjectCreated;
 use App\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ProjectsController extends Controller
 {
@@ -54,7 +56,11 @@ class ProjectsController extends Controller
 
         $validated['user_id'] = auth()->id();
 
-        Project::create($validated);
+        $project = Project::create($validated);
+
+        Mail::to('kotlyarchukd@gmail.com')->send(
+            new ProjectCreated($project)
+        );
 
         return redirect('/projects');
     }
