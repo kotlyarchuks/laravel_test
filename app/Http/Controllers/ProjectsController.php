@@ -21,16 +21,19 @@ class ProjectsController extends Controller
 
     public function show(Project $project)
     {
+        $this->authorize('update', $project);
         return view('projects/show', compact('project'));
     }
 
     public function edit(Project $project)
     {
+        $this->authorize('update', $project);
         return view('projects/edit', compact('project'));
     }
 
     public function update(Project $project)
     {
+        $this->authorize('update', $project);
         $project->update(request(['title', 'description']));
 
         return redirect('/projects');
@@ -48,17 +51,16 @@ class ProjectsController extends Controller
             'description' => 'required|min:3',
         ]);
 
-        Project::create([
-            'title' => $validated['title'],
-            'description' => $validated['description'],
-            'user_id' => auth()->id(),
-        ]);
+        $validated['user_id'] = auth()->id();
+
+        Project::create($validated);
 
         return redirect('/projects');
     }
 
     public function destroy(Project $project)
     {
+        $this->authorize('update', $project);
         $project->delete();
 
         return redirect('/projects');
