@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Project;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ProjectsController extends Controller
 {
@@ -15,7 +14,7 @@ class ProjectsController extends Controller
 
     public function index()
     {
-        $projects = Auth::user()->projects->all();
+        $projects = auth()->user()->projects->all();
 
         return view('projects/index', compact('projects'));
     }
@@ -52,7 +51,7 @@ class ProjectsController extends Controller
         Project::create([
             'title' => $validated['title'],
             'description' => $validated['description'],
-            'user_id' => Auth::id(),
+            'user_id' => auth()->id(),
         ]);
 
         return redirect('/projects');
