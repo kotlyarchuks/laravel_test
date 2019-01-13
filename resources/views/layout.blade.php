@@ -43,16 +43,29 @@
           </a>
         </div>
         <div class="navbar-end">
+          @if (Auth::check())
+            <div class="navbar-item">{{ Auth::user()->name }}</div>
+            <div class="navbar-item">
+              <form action="/logout" method="POST">
+                @csrf
+                <button type="submit" href="/logout" class="button is-light">
+                  Log out
+                </button>
+              </form>
+            </div>
+          @else
           <div class="navbar-item">
             <div class="buttons">
-              <a class="button is-primary">
+              <a href="/register" class="button is-primary">
                 <strong>Sign up</strong>
               </a>
-              <a class="button is-light">
+              <a href="/login" class="button is-light">
                 Log in
               </a>
             </div>
           </div>
+          @endif
+          {{-- Auth end --}}
         </div>
       </div>
   </nav>

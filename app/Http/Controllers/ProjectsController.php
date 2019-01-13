@@ -4,12 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        $projects = Project::all();
+        $projects = Auth::user()->projects->all();
 
         return view('projects/index', compact('projects'));
     }
@@ -43,7 +49,11 @@ class ProjectsController extends Controller
             'description' => 'required|min:3',
         ]);
 
-        Project::create($validated);
+        Project::create([
+            'title' => $validated['title'],
+            'description' => $validated['description'],
+            'user_id' => Auth::id(),
+        ]);
 
         return redirect('/projects');
     }
