@@ -14,7 +14,7 @@ class ProjectsController extends Controller
 
     public function index()
     {
-        $projects = auth()->user()->projects->all();
+        $projects = auth()->user()->projects;
 
         return view('projects/index', compact('projects'));
     }
@@ -22,19 +22,23 @@ class ProjectsController extends Controller
     public function show(Project $project)
     {
         $this->authorize('update', $project);
+
         return view('projects/show', compact('project'));
     }
 
     public function edit(Project $project)
     {
         $this->authorize('update', $project);
+
         return view('projects/edit', compact('project'));
     }
 
     public function update(Project $project)
     {
         $this->authorize('update', $project);
-        $project->update(request(['title', 'description']));
+
+        $validated = $this->validateProject();
+        $project->update($validated);
 
         return redirect('/projects');
     }
@@ -46,10 +50,7 @@ class ProjectsController extends Controller
 
     public function store()
     {
-        $validated = request()->validate([
-            'title' => 'required|min:3|max:255',
-            'description' => 'required|min:3',
-        ]);
+        $validated = $this->validateProject();
 
         $validated['user_id'] = auth()->id();
 
@@ -64,5 +65,13 @@ class ProjectsController extends Controller
         $project->delete();
 
         return redirect('/projects');
+    }
+
+    protected function validateProject()
+    {
+        return request()->validate([
+            'title' => 'required|min:3|max:255',
+            'description' => 'required|min:3',
+        ]);
     }
 }

@@ -2,7 +2,8 @@
 @section('content')
 <div class="columns is-centered">
   <div class="column is-half">
-    <h2 class="title">Create new project</h2>
+    @include('errors')
+    <h2 class="title">Edit project</h2>
     <form action="/projects/{{$project->id}}" method="POST">
       @method('patch') @csrf
 
